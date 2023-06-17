@@ -1,0 +1,144 @@
+[   18.434559] ==================================================================
+[   18.435173] BUG: KASAN: use-after-free in vb2_mmap+0x1ae/0x2e0
+[   18.435647] Read of size 8 at addr ffff8880094ba000 by task poc/1232
+[   18.436145] 
+[   18.436274] CPU: 0 PID: 1232 Comm: poc Not tainted 5.15.0-detector-kasan #19
+[   18.436848] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   18.437525] Call Trace:
+[   18.437741]  dump_stack_lvl+0x34/0x44
+[   18.438047]  print_address_description.constprop.0+0x21/0x140
+[   18.438574]  ? vb2_mmap+0x1ae/0x2e0
+[   18.438897]  ? vb2_mmap+0x1ae/0x2e0
+[   18.439221]  kasan_report.cold+0x83/0xdf
+[   18.439595]  ? vb2_mmap+0x1ae/0x2e0
+[   18.439920]  vb2_mmap+0x1ae/0x2e0
+[   18.440256]  v4l2_mmap+0xe6/0x100
+[   18.440610]  mmap_region+0x588/0x8b0
+[   18.440989]  do_mmap+0x3bf/0x600
+[   18.441332]  vm_mmap_pgoff+0x15d/0x200
+[   18.441730]  ? randomize_stack_top+0x80/0x80
+[   18.442215]  ? __schedule+0x582/0xf30
+[   18.442646]  ? __fget_files+0xc6/0x100
+[   18.443084]  ksys_mmap_pgoff+0x2b8/0x310
+[   18.443542]  ? mlock_future_check+0x90/0x90
+[   18.444081]  ? switch_fpu_return+0x9b/0x120
+[   18.444624]  ? exit_to_user_mode_prepare+0x95/0x150
+[   18.445251]  do_syscall_64+0x3b/0x90
+[   18.445664]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[   18.445912] RIP: 0033:0x7fb810f6f9b9
+[   18.446090] Code: 00 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 48
+[   18.446990] RSP: 002b:00007ffe0b26e218 EFLAGS: 00000216 ORIG_RAX: 0000000000000009
+[   18.447356] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007fb810f6f9b9
+[   18.447704] RDX: fffffffffffffffd RSI: 0000000000002000 RDI: 0000000020ffe000
+[   18.448061] RBP: 00007ffe0b26e240 R08: 0000000000000003 R09: 0000000000000000
+[   18.448409] R10: 0000000000000011 R11: 0000000000000216 R12: 00005625540461a0
+[   18.448753] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+[   18.449097] 
+[   18.449174] Allocated by task 1233:
+[   18.449347]  kasan_save_stack+0x1b/0x40
+[   18.449541]  __kasan_kmalloc+0x7c/0x90
+[   18.449725]  __vb2_queue_alloc+0xa6/0x690
+[   18.449922]  vb2_core_create_bufs+0x1b7/0x420
+[   18.450135]  vb2_create_bufs+0x195/0x300
+[   18.450329]  vb2_ioctl_create_bufs+0x11a/0x170
+[   18.450546]  v4l_create_bufs+0x83/0xc0
+[   18.450731]  __video_do_ioctl+0x57f/0x5c0
+[   18.450948]  video_usercopy+0x1ea/0x8f0
+[   18.451138]  v4l2_ioctl+0xd2/0xe0
+[   18.451303]  __x64_sys_ioctl+0xb9/0xf0
+[   18.451491]  do_syscall_64+0x3b/0x90
+[   18.451670]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[   18.451916] 
+[   18.452017] Freed by task 1233:
+[   18.452175]  kasan_save_stack+0x1b/0x40
+[   18.452366]  kasan_set_track+0x1c/0x30
+[   18.452552]  kasan_set_free_info+0x20/0x30
+[   18.452753]  __kasan_slab_free+0xea/0x120
+[   18.452949]  kfree+0x90/0x220
+[   18.453098]  __vb2_queue_free+0x27b/0x370
+[   18.453296]  vb2_core_queue_release+0x41/0x50
+[   18.453509]  _vb2_fop_release+0xe8/0x110
+[   18.453702]  v4l2_release+0x116/0x190
+[   18.453882]  __fput+0x104/0x400
+[   18.454038]  task_work_run+0x97/0xd0
+[   18.454214]  do_exit+0x5c2/0x1290
+[   18.454379]  do_group_exit+0x78/0x120
+[   18.454560]  __x64_sys_exit_group+0x28/0x30
+[   18.454766]  do_syscall_64+0x3b/0x90
+[   18.454942]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[   18.455188] 
+[   18.455265] The buggy address belongs to the object at ffff8880094ba000
+[   18.455265]  which belongs to the cache kmalloc-1k of size 1024
+[   18.455865] The buggy address is located 0 bytes inside of
+[   18.455865]  1024-byte region [ffff8880094ba000, ffff8880094ba400)
+[   18.456425] The buggy address belongs to the page:
+[   18.456659] page:0000000011ab3387 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x94b8
+[   18.457104] head:0000000011ab3387 order:3 compound_mapcount:0 compound_pincount:0
+[   18.457470] flags: 0x100000000010200(slab|head|node=0|zone=1)
+[   18.457774] raw: 0100000000010200 dead000000000100 dead000000000122 ffff888005c41dc0
+[   18.458156] raw: 0000000000000000 0000000000100010 00000001ffffffff 0000000000000000
+[   18.458534] page dumped because: kasan: bad access detected
+[   18.458806] 
+[   18.458883] Memory state around the buggy address:
+[   18.459119]  ffff8880094b9f00: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+[   18.459493]  ffff8880094b9f80: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+[   18.459852] >ffff8880094ba000: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[   18.460200]                    ^
+[   18.460359]  ffff8880094ba080: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[   18.460707]  ffff8880094ba100: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[   18.461055] ==================================================================
+[   18.461428] Disabling lock debugging due to kernel taint
+[   18.461739] BUG: kernel NULL pointer dereference, address: 0000000000000070
+[   18.462079] #PF: supervisor read access in kernel mode
+[   18.462330] #PF: error_code(0x0000) - not-present page
+[   18.462582] PGD 91e9067 P4D 91e9067 PUD 8c04067 PMD 0 
+[   18.462835] Oops: 0000 [#1] SMP KASAN
+[   18.463016] CPU: 0 PID: 1232 Comm: poc Tainted: G    B             5.15.0-detector-kasan #19
+[   18.463423] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   18.463829] RIP: 0010:vb2_mmap+0x1df/0x2e0
+[   18.464031] Code: 48 8d 78 38 48 89 44 24 08 e8 8d 1b 41 ff 48 8b 44 24 08 48 8b 40 38 48 8d 78 70 48 89 44 24 08 e8 76 1b 44
+[   18.464941] RSP: 0018:ffff8880093b7c48 EFLAGS: 00010286
+[   18.465196] RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff82092b5a
+[   18.465542] RDX: 0000000000000000 RSI: 0000000000000008 RDI: 0000000000000070
+[   18.465886] RBP: ffff8880094ba000 R08: 0000000000000001 R09: fffffbfff0af0571
+[   18.466231] R10: ffffffff85782b87 R11: fffffbfff0af0570 R12: ffff888009ea8180
+[   18.466576] R13: ffff888009616108 R14: 0000000000000000 R15: ffff888009ea8228
+[   18.466920] FS:  00007fb810e74740(0000) GS:ffff888036200000(0000) knlGS:0000000000000000
+[   18.467312] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   18.467593] CR2: 0000000000000070 CR3: 000000000b0a0000 CR4: 00000000000006f0
+[   18.467939] Call Trace:
+[   18.468062]  v4l2_mmap+0xe6/0x100
+[   18.468227]  mmap_region+0x588/0x8b0
+[   18.468404]  do_mmap+0x3bf/0x600
+[   18.468564]  vm_mmap_pgoff+0x15d/0x200
+[   18.468750]  ? randomize_stack_top+0x80/0x80
+[   18.468959]  ? __schedule+0x582/0xf30
+[   18.469140]  ? __fget_files+0xc6/0x100
+[   18.469354]  ksys_mmap_pgoff+0x2b8/0x310
+[   18.469548]  ? mlock_future_check+0x90/0x90
+[   18.469753]  ? switch_fpu_return+0x9b/0x120
+[   18.469959]  ? exit_to_user_mode_prepare+0x95/0x150
+[   18.470199]  do_syscall_64+0x3b/0x90
+[   18.470376]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[   18.470623] RIP: 0033:0x7fb810f6f9b9
+[   18.470799] Code: 00 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 48
+[   18.471696] RSP: 002b:00007ffe0b26e218 EFLAGS: 00000216 ORIG_RAX: 0000000000000009
+[   18.472062] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007fb810f6f9b9
+[   18.472409] RDX: fffffffffffffffd RSI: 0000000000002000 RDI: 0000000020ffe000
+[   18.472756] RBP: 00007ffe0b26e240 R08: 0000000000000003 R09: 0000000000000000
+[   18.473100] R10: 0000000000000011 R11: 0000000000000216 R12: 00005625540461a0
+[   18.473445] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+[   18.473789] Modules linked in:
+[   18.473942] CR2: 0000000000000070
+[   18.474125] ---[ end trace 338d61c371adb8c9 ]---
+[   18.474360] RIP: 0010:vb2_mmap+0x1df/0x2e0
+[   18.474565] Code: 48 8d 78 38 48 89 44 24 08 e8 8d 1b 41 ff 48 8b 44 24 08 48 8b 40 38 48 8d 78 70 48 89 44 24 08 e8 76 1b 44
+[   18.475482] RSP: 0018:ffff8880093b7c48 EFLAGS: 00010286
+[   18.475771] RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff82092b5a
+[   18.476117] RDX: 0000000000000000 RSI: 0000000000000008 RDI: 0000000000000070
+[   18.476469] RBP: ffff8880094ba000 R08: 0000000000000001 R09: fffffbfff0af0571
+[   18.477093] R10: ffffffff85782b87 R11: fffffbfff0af0570 R12: ffff888009ea8180
+[   18.478019] R13: ffff888009616108 R14: 0000000000000000 R15: ffff888009ea8228
+[   18.478974] FS:  00007fb810e74740(0000) GS:ffff888036200000(0000) knlGS:0000000000000000
+[   18.480083] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   18.480622] CR2: 0000000000000070 CR3: 000000000b0a0000 CR4: 00000000000006f0

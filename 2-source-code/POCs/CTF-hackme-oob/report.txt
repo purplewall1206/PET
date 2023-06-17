@@ -1,0 +1,60 @@
+[   21.105491] ==================================================================
+[   21.105846] BUG: KASAN: stack-out-of-bounds in hackme_read+0x83/0xf0
+[   21.106171] Read of size 320 at addr ffff888008bafd48 by task poc/1136
+
+[   21.106606] CPU: 1 PID: 1136 Comm: poc Not tainted 5.15.0-detector-kasan #1
+[   21.107017] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   21.107443] Call Trace:
+[   21.107582]  dump_stack_lvl+0x34/0x44
+[   21.107782]  print_address_description.constprop.0+0x21/0x140
+[   21.108109]  ? hackme_read+0x83/0xf0
+[   21.108296]  ? hackme_read+0x83/0xf0
+[   21.108476]  kasan_report.cold+0x83/0xdf
+[   21.108683]  ? n_tty_read+0x880/0x940
+[   21.108880]  ? hackme_read+0x83/0xf0
+[   21.109069]  kasan_check_range+0x14e/0x1b0
+[   21.109280]  memcpy+0x20/0x60
+[   21.109434]  hackme_read+0x83/0xf0
+[   21.109626]  ? try_to_run_init_process+0x34/0x34
+[   21.109929]  ? common_file_perm+0x13d/0x2c0
+[   21.110147]  ? __fsnotify_update_child_dentry_flags+0x1a0/0x1a0
+[   21.110455]  ? apparmor_task_setrlimit+0x2a0/0x2a0
+[   21.110696]  proc_reg_read+0xdf/0x110
+[   21.110881]  vfs_read+0xc8/0x260
+[   21.111047]  ksys_read+0xb9/0x150
+[   21.111217]  ? vfs_write+0x390/0x390
+[   21.111396]  ? fpregs_assert_state_consistent+0x52/0x60
+[   21.111657]  ? exit_to_user_mode_prepare+0x35/0x150
+[   21.111902]  do_syscall_64+0x3b/0x90
+[   21.112084]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[   21.112335] RIP: 0033:0x7fcc50979e8e
+[   21.112514] Code: c0 e9 b6 fe ff ff 50 48 8d 3d 6e 18 0a 00 e8 89 e8 01 00 66 0f 1f 84 00 00 00 00 00 64 8b 04 25 18 00 00 00 85 c0 75 14 0f 05 <48> 3d 00 f0 ff ff 8
+[   21.113412] RSP: 002b:00007ffdd9698198 EFLAGS: 00000246 ORIG_RAX: 0000000000000000
+[   21.113781] RAX: ffffffffffffffda RBX: 0000000000000028 RCX: 00007fcc50979e8e
+[   21.114160] RDX: 0000000000000140 RSI: 00007ffdd96981a0 RDI: 0000000000000003
+[   21.114520] RBP: 00007ffdd9698330 R08: 0000000000000000 R09: 0000000000000027
+[   21.114886] R10: fffffffffffff28c R11: 0000000000000246 R12: 00007ffdd96982e0
+[   21.115243] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+
+[   21.115716] The buggy address belongs to the page:
+[   21.115952] page:00000000960fd292 refcount:0 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x8baf
+[   21.116400] flags: 0x100000000000000(node=0|zone=1)
+[   21.116641] raw: 0100000000000000 0000000000000000 ffffea000022ecc8 0000000000000000
+[   21.117021] raw: 0000000000000000 0000000000240000 00000000ffffffff 0000000000000000
+[   21.117403] page dumped because: kasan: bad access detected
+
+[   21.117767] addr ffff888008bafd48 is located in stack of task poc/1136 at offset 32 in frame:
+[   21.118202]  hackme_read+0x0/0xf0
+
+[   21.118452] this frame has 1 object:
+[   21.118630]  [32, 160) 'tmp'
+
+[   21.118849] Memory state around the buggy address:
+[   21.119081]  ffff888008bafc80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[   21.119427]  ffff888008bafd00: 00 00 00 00 00 f1 f1 f1 f1 00 00 00 00 00 00 00
+[   21.119777] >ffff888008bafd80: 00 00 00 00 00 00 00 00 00 f3 f3 f3 f3 00 00 00
+[   21.120130]                                               ^
+[   21.120407]  ffff888008bafe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[   21.120760]  ffff888008bafe80: 00 00 00 00 00 f1 f1 f1 f1 00 f3 f3 f3 00 00 00
+[   21.121111] ==================================================================
+[   21.121458] Disabling lock debugging due to kernel taint

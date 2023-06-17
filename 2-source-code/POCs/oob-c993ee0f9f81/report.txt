@@ -1,0 +1,58 @@
+[  261.793535] ==================================================================
+[  261.794392] BUG: KASAN: slab-out-of-bounds in watch_queue_set_filter+0x21a/0x370
+[  261.794753] Write of size 4 at addr ffff8880080f039c by task poc/51886
+[  261.795067] 
+[  261.795145] CPU: 1 PID: 51886 Comm: poc Not tainted 5.15.0-detector-kasan #9
+[  261.795482] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[  261.795884] Call Trace:
+[  261.796007]  dump_stack_lvl+0x34/0x44
+[  261.796190]  print_address_description.constprop.0+0x21/0x140
+[  261.796471]  ? watch_queue_set_filter+0x21a/0x370
+[  261.796703]  ? watch_queue_set_filter+0x21a/0x370
+[  261.796932]  kasan_report.cold+0x83/0xdf
+[  261.797126]  ? watch_queue_set_filter+0x21a/0x370
+[  261.797353]  watch_queue_set_filter+0x21a/0x370
+[  261.797573]  ? watch_queue_set_size+0x290/0x290
+[  261.797796]  ? up_read+0x15/0x80
+[  261.797958]  ? mlock_future_check+0x90/0x90
+[  261.798166]  ? pipe_ioctl+0x29/0x160
+[  261.798345]  __x64_sys_ioctl+0xb9/0xf0
+[  261.798534]  do_syscall_64+0x3b/0x90
+[  261.798714]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[  261.798963] RIP: 0033:0x7f0005e229b9
+[  261.799141] Code: 00 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 48
+[  261.800044] RSP: 002b:00007ffe7204a0b8 EFLAGS: 00000213 ORIG_RAX: 0000000000000010
+[  261.800413] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f0005e229b9
+[  261.800766] RDX: 0000000020000300 RSI: 0000000000005761 RDI: 0000000000000004
+[  261.801113] RBP: 00007ffe7204a0d0 R08: 00007ffe7204a1c0 R09: 00007ffe7204a1c0
+[  261.801460] R10: 0000000000000000 R11: 0000000000000213 R12: 0000561b8134d050
+[  261.801807] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+[  261.802155] 
+[  261.802234] Allocated by task 51886:
+[  261.802412]  kasan_save_stack+0x1b/0x40
+[  261.802604]  __kasan_kmalloc+0x7c/0x90
+[  261.802790]  watch_queue_set_filter+0x19a/0x370
+[  261.803013]  __x64_sys_ioctl+0xb9/0xf0
+[  261.803199]  do_syscall_64+0x3b/0x90
+[  261.803375]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[  261.803624] 
+[  261.803703] The buggy address belongs to the object at ffff8880080f0380
+[  261.803703]  which belongs to the cache kmalloc-32 of size 32
+[  261.804300] The buggy address is located 28 bytes inside of
+[  261.804300]  32-byte region [ffff8880080f0380, ffff8880080f03a0)
+[  261.804862] The buggy address belongs to the page:
+[  261.805097] page:000000005613b222 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x80f0
+[  261.805547] flags: 0x100000000000200(slab|node=0|zone=1)
+[  261.805810] raw: 0100000000000200 ffffea0000161480 0000000f0000000f ffff888005841500
+[  261.806187] raw: 0000000000000000 0000000080400040 00000001ffffffff 0000000000000000
+[  261.806565] page dumped because: kasan: bad access detected
+[  261.806837] 
+[  261.806915] Memory state around the buggy address:
+[  261.807150]  ffff8880080f0280: fb fb fb fb fc fc fc fc fb fb fb fb fc fc fc fc
+[  261.807500]  ffff8880080f0300: fa fb fb fb fc fc fc fc fb fb fb fb fc fc fc fc
+[  261.807853] >ffff8880080f0380: 00 00 00 fc fc fc fc fc 00 00 00 fc fc fc fc fc
+[  261.808203]                             ^
+[  261.808400]  ffff8880080f0400: 00 00 00 fc fc fc fc fc fa fb fb fb fc fc fc fc
+[  261.808754]  ffff8880080f0480: 00 00 00 fc fc fc fc fc 00 00 00 fc fc fc fc fc
+[  261.809105] ==================================================================
+[  261.809456] Disabling lock debugging due to kernel taint

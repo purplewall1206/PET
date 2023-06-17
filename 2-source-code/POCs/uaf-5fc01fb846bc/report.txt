@@ -1,0 +1,74 @@
+[   55.993835] ==================================================================
+[   55.995865] BUG: KASAN: use-after-free in rdma_listen+0x488/0x620
+[   55.997579] Write of size 8 at addr ffff88800ada81e0 by task poc/3022
+[   55.999376] 
+[   55.999820] CPU: 0 PID: 3022 Comm: poc Not tainted 5.15.0-detector-kasan #15
+[   56.001745] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   56.003755] Call Trace:
+[   56.004386]  dump_stack_lvl+0x34/0x44
+[   56.004386]   ? rdma_listen+0x488/0x620
+[   56.004386]  ? rdma_listen+0x488/0x620
+[   56.008835]  kasan_report.cold+0x83/0xdf
+[   56.009814]  ? iwpm_hello_cb+0x171/0x180
+[   56.010612]  ? rdma_listen+0x488/0x620
+[   56.011383]  rdma_listen+0x488/0x620
+[   56.012159]  ? aa_path_link+0x1d0/0x1d0
+[   56.012938]  ? __update_load_avg_cfs_rq+0x52/0x550
+[   56.013915]  ? rdma_resolve_addr+0xe50/0xe50
+[   56.014805]  ? mutex_lock+0x8e/0xe0
+[   56.015406]  ? __mutex_lock_slowpath+0x10/0x10
+[   56.016069]  ucma_listen+0xe6/0x150
+[   56.016603]  ? ucma_set_option+0x280/0x280
+[   56.017045]  ucma_write+0x17b/0x1f0
+[   56.017423]  ? ucma_get_event+0x330/0x330
+[   56.017918]  ? bpf_lsm_kernfs_init_security+0x10/0x10
+[   56.018410]  ? security_file_permission+0x4b/0x2b0
+[   56.018801]  vfs_write+0xfc/0x390
+[   56.019078]  ksys_write+0x120/0x150
+[   56.019406]  ? __ia32_sys_read+0x50/0x50
+[   56.019729]  ? switch_fpu_return+0x9b/0x120
+[   56.020203]  ? exit_to_user_mode_prepare+0x95/0x150
+(gdb) [   56.021039]  do_syscall_64+0x3b/0x90
+[   56.021725]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[   56.022325] RIP: 0033:0x7ffff7ed49b9
+[   56.022678] Code: 00 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 48
+[   56.024242] RSP: 002b:00007fffffffeaf8 EFLAGS: 00000207 ORIG_RAX: 0000000000000001
+[   56.024848] RAX: ffffffffffffffda RBX: 0000000020000228 RCX: 00007ffff7ed49b9
+[   56.025419] RDX: 0000000000000010 RSI: 00000000200001c0 RDI: 0000000000000003
+[   56.025988] RBP: 00007fffffffeb20 R08: 0000000000000000 R09: 0000000000000000
+[   56.026559] R10: 0000000000000000 R11: 0000000000000207 R12: 0000555555555160
+[   56.027131] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+[   56.027721] 
+[   56.027853] Allocated by task 2123:
+[   56.028150]  kasan_save_stack+0x1b/0x40
+[   56.028479]  __kasan_kmalloc+0x7c/0x90
+[   56.028796]  __rdma_create_id+0x4f/0x2a0
+[   56.029138]  rdma_create_user_id+0x55/0x80
+[   56.029495]  ucma_create_id+0x100/0x240
+[   56.029833]  ucma_write+0x17b/0x1f0
+[   56.030141]  vfs_write+0xfc/0x390
+[   56.030438]  ksys_write+0x120/0x150
+[   56.030749]  do_syscall_64+0x3b/0x90
+[   56.031063]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[   56.031500] 
+[   56.031637] The buggy address belongs to the object at ffff88800ada8000
+[   56.031637]  which belongs to the cache kmalloc-1k of size 1024
+[   56.032699] The buggy address is located 480 bytes inside of
+[   56.032699]  1024-byte region [ffff88800ada8000, ffff88800ada8400)
+[   56.033701] The buggy address belongs to the page:
+[   56.034112] page:00000000075a942d refcount:1 mapcount:0 mapping:0000000000000000 index:0xffff88800adac000 pfn:0xada8
+[   56.034804] head:00000000075a942d order:3 compound_mapcount:0 compound_pincount:0
+[   56.035166] flags: 0x100000000010200(slab|head|node=0|zone=1)
+[   56.035450] raw: 0100000000010200 ffffea00002bf008 ffffea00002c3208 ffff888005c41dc0
+[   56.035826] raw: ffff88800adac000 0000000000100005 00000001ffffffff 0000000000000000
+[   56.036201] page dumped because: kasan: bad access detected
+[   56.036473] 
+[   56.036550] Memory state around the buggy address:
+[   56.036785]  ffff88800ada8080: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[   56.037135]  ffff88800ada8100: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[   56.037486] >ffff88800ada8180: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[   56.037836]                                                        ^
+[   56.038146]  ffff88800ada8200: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[   56.038496]  ffff88800ada8280: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[   56.038847] ==================================================================
+[   56.039197] Disabling lock debugging due to kernel taint

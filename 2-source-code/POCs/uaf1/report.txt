@@ -1,0 +1,236 @@
+[ 1157.879083] ==================================================================
+[ 1157.879503] BUG: KASAN: use-after-free in route4_destroy+0x149/0x350
+[ 1157.879828] Read of size 8 at addr ffff8880094dc800 by task kworker/u4:3/221
+[ 1157.880175] 
+[ 1157.880257] CPU: 0 PID: 221 Comm: kworker/u4:3 Not tainted 5.15.0-detector-kasan #18
+[ 1157.880636] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[ 1157.881064] Workqueue: netns cleanup_net
+[ 1157.881267] Call Trace:
+[ 1157.881399]  dump_stack_lvl+0x34/0x44
+[ 1157.881591]  print_address_description.constprop.0+0x21/0x140
+[ 1157.881879]  ? route4_destroy+0x149/0x350
+[ 1157.882103]  ? route4_destroy+0x149/0x350
+[ 1157.882333]  kasan_report.cold+0x83/0xdf
+[ 1157.882557]  ? route4_destroy+0x149/0x350
+[ 1157.882794]  route4_destroy+0x149/0x350
+[ 1157.883010]  ? route4_init+0x50/0x50
+[ 1157.883214]  ? mutex_lock+0x8e/0xe0
+[ 1157.883416]  ? __mutex_lock_slowpath+0x10/0x10
+[ 1157.883667]  tcf_proto_destroy+0x4e/0x150
+[ 1157.883894]  tcf_chain_flush+0xd2/0x140
+[ 1157.884111]  __tcf_block_put+0xd9/0x1b0
+[ 1157.884328]  tcf_block_put+0x9c/0xe0
+[ 1157.884531]  ? tcf_block_put_ext+0x60/0x60
+[ 1157.884763]  ? hfsc_reset_qdisc+0x5c3/0x5e0
+[ 1157.885003]  hfsc_destroy_qdisc+0x77/0x130
+[ 1157.885235]  qdisc_destroy+0x5c/0x120
+[ 1157.885442]  dev_shutdown+0x122/0x170
+[ 1157.885660]  unregister_netdevice_many+0x45f/0x9c0
+[ 1157.885929]  ? mutex_is_locked+0x1b/0x30
+[ 1157.886158]  ? dev_qdisc_enqueue+0xc0/0xc0
+[ 1157.886388]  ? unregister_netdevice_many+0x9c0/0x9c0
+[ 1157.886667]  ? __mutex_lock_slowpath+0x10/0x10
+[ 1157.886916]  ? remove_proc_subtree+0x257/0x2d0
+[ 1157.887168]  sit_exit_batch_net+0x206/0x250
+[ 1157.887405]  ? ipip6_get_size+0x10/0x10
+[ 1157.887620]  ? rxrpc_destroy_all_locals+0x37/0xc0
+[ 1157.887887]  ? rxrpc_destroy_all_locals+0xc0/0xc0
+[ 1157.888151]  cleanup_net+0x2e6/0x4d0
+[ 1157.888354]  ? net_free+0x60/0x60
+[ 1157.888543]  ? read_word_at_a_time+0xe/0x20
+[ 1157.888782]  ? strscpy+0xbf/0x190
+[ 1157.888988]  process_one_work+0x48d/0x790
+[ 1157.889215]  worker_thread+0x78/0x6c0
+[ 1157.889423]  ? process_one_work+0x790/0x790
+[ 1157.889659]  kthread+0x1d2/0x200
+[ 1157.889842]  ? set_kthread_struct+0x80/0x80
+[ 1157.890077]  ret_from_fork+0x22/0x30
+[ 1157.890282] 
+[ 1157.890369] Allocated by task 3328259:
+[ 1157.890559]  kasan_save_stack+0x1b/0x40
+[ 1157.890756]  __kasan_kmalloc+0x7c/0x90
+[ 1157.890947]  route4_change+0x18f/0xde0
+[ 1157.891136]  tc_new_tfilter+0x51a/0xfb0
+[ 1157.891330]  rtnetlink_rcv_msg+0x454/0x520
+[ 1157.891548]  netlink_rcv_skb+0x15c/0x1f0
+[ 1157.891783]  netlink_unicast+0x2d8/0x3d0
+[ 1157.892012]  netlink_sendmsg+0x398/0x680
+[ 1157.892210]  sock_sendmsg+0x96/0xa0
+[ 1157.892389]  ____sys_sendmsg+0x347/0x3e0
+[ 1157.892585]  ___sys_sendmsg+0xe0/0x140
+[ 1157.892771]  __sys_sendmsg+0xb3/0x130
+[ 1157.892956]  do_syscall_64+0x3b/0x90
+[ 1157.893134]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[ 1157.893382] 
+[ 1157.893460] Last potentially related work creation:
+[ 1157.893701]  kasan_save_stack+0x1b/0x40
+[ 1157.893891]  kasan_record_aux_stack+0xa3/0xb0
+[ 1157.894106]  insert_work+0x30/0x160
+[ 1157.894285]  __queue_work+0x1fb/0x5d0
+[ 1157.894464]  rcu_work_rcufn+0x2a/0x30
+[ 1157.894645]  rcu_core+0x3f2/0xc90
+[ 1157.894810]  __do_softirq+0xf6/0x355
+[ 1157.894988] 
+[ 1157.895072] Second to last potentially related work creation:
+[ 1157.895398]  kasan_save_stack+0x1b/0x40
+[ 1157.895614]  kasan_record_aux_stack+0xa3/0xb0
+[ 1157.895857]  call_rcu+0x52/0x590
+[ 1157.896039]  queue_rcu_work+0x44/0x50
+[ 1157.896245]  route4_change+0xbbc/0xde0
+[ 1157.896456]  tc_new_tfilter+0x51a/0xfb0
+[ 1157.896672]  rtnetlink_rcv_msg+0x454/0x520
+[ 1157.896905]  netlink_rcv_skb+0x15c/0x1f0
+[ 1157.897126]  netlink_unicast+0x2d8/0x3d0
+[ 1157.897345]  netlink_sendmsg+0x398/0x680
+[ 1157.897564]  sock_sendmsg+0x96/0xa0
+[ 1157.897761]  ____sys_sendmsg+0x347/0x3e0
+[ 1157.897982]  ___sys_sendmsg+0xe0/0x140
+[ 1157.898193]  __sys_sendmsg+0xb3/0x130
+[ 1157.898399]  do_syscall_64+0x3b/0x90
+[ 1157.898605]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[ 1157.898886] 
+[ 1157.898974] The buggy address belongs to the object at ffff8880094dc800
+[ 1157.898974]  which belongs to the cache kmalloc-192 of size 192
+[ 1157.899662] The buggy address is located 0 bytes inside of
+[ 1157.899662]  192-byte region [ffff8880094dc800, ffff8880094dc8c0)
+[ 1157.900296] The buggy address belongs to the page:
+[ 1157.900562] page:000000000ec7118b refcount:1 mapcount:0 mapping:0000000000000000 index:0xffff8880094dca00 pfn:0x94dc
+[ 1157.901075] flags: 0x100000000000200(slab|node=0|zone=1)
+[ 1157.901337] raw: 0100000000000200 ffffea0000228b00 0000000200000002 ffff888005c41a00
+[ 1157.901712] raw: ffff8880094dca00 000000008010000e 00000001ffffffff 0000000000000000
+[ 1157.902093] page dumped because: kasan: bad access detected
+[ 1157.902365] 
+[ 1157.902442] Memory state around the buggy address:
+[ 1157.902676]  ffff8880094dc700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1157.903027]  ffff8880094dc780: 00 00 00 00 00 00 fc fc fc fc fc fc fc fc fc fc
+[ 1157.903376] >ffff8880094dc800: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[ 1157.903728]                    ^
+[ 1157.903890]  ffff8880094dc880: fb fb fb fb fb fb fb fb fc fc fc fc fc fc fc fc
+[ 1157.904243]  ffff8880094dc900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1157.904599] ==================================================================
+[ 1157.904962] Disabling lock debugging due to kernel taint
+[ 1157.905261] ------------[ cut here ]------------
+[ 1157.905495] refcount_t: underflow; use-after-free.
+[ 1157.905748] WARNING: CPU: 0 PID: 221 at lib/refcount.c:87 refcount_dec_not_one+0x107/0x110
+[ 1157.906181] Modules linked in:
+[ 1157.906358] CPU: 0 PID: 221 Comm: kworker/u4:3 Tainted: G    B             5.15.0-detector-kasan #18
+[ 1157.906877] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[ 1157.907339] Workqueue: netns cleanup_net
+[ 1157.907566] RIP: 0010:refcount_dec_not_one+0x107/0x110
+[ 1157.907872] Code: 68 44 89 c0 5b 5d 41 5c c3 45 31 c0 eb cc 80 3d 8d 4f 29 03 00 75 bd 48 c7 c7 60 2d 20 83 c6 05 7d 4f 29 05
+[ 1157.908923] RSP: 0018:ffff888009ca7790 EFLAGS: 00010282
+[ 1157.909219] RAX: 0000000000000000 RBX: ffff8880094dc81c RCX: 0000000000000000
+[ 1157.909626] RDX: 0000000000000027 RSI: 0000000000000004 RDI: ffffed1001394ee4
+[ 1157.910044] RBP: 1ffff11001394ef3 R08: ffffffff8134c6de R09: ffffed1006c43ea8
+[ 1157.910448] R10: ffff88803621f53b R11: ffffed1006c43ea7 R12: 00000000ffffffff
+[ 1157.910856] R13: 0000000000000000 R14: 0000000000000001 R15: ffff88800986a500
+[ 1157.911266] FS:  0000000000000000(0000) GS:ffff888036200000(0000) knlGS:0000000000000000
+[ 1157.911717] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 1157.912051] CR2: 00007fa0d4ca66f4 CR3: 0000000004210000 CR4: 00000000000006f0
+[ 1157.912455] Call Trace:
+[ 1157.912599]  ? refcount_warn_saturate+0x110/0x110
+[ 1157.912891]  ? asm_sysvec_apic_timer_interrupt+0x12/0x20
+[ 1157.913195]  ? route4_destroy+0x149/0x350
+[ 1157.913397]  ? route4_destroy+0x149/0x350
+[ 1157.913599]  refcount_dec_and_mutex_lock+0x13/0x80
+[ 1157.913854]  __tcf_action_put+0x27/0xa0
+[ 1157.914049]  __tcf_idr_release+0x4a/0x70
+[ 1157.914260]  tcf_action_destroy+0x67/0xa0
+[ 1157.914486]  tcf_exts_destroy+0x29/0x50
+[ 1157.914701]  __route4_delete_filter+0x16/0x90
+[ 1157.914953]  route4_destroy+0x28f/0x350
+[ 1157.915170]  ? route4_init+0x50/0x50
+[ 1157.915372]  ? __mutex_lock_slowpath+0x10/0x10
+[ 1157.915620]  tcf_proto_destroy+0x4e/0x150
+[ 1157.915853]  tcf_chain_flush+0xd2/0x140
+[ 1157.916070]  __tcf_block_put+0xd9/0x1b0
+[ 1157.916288]  tcf_block_put+0x9c/0xe0
+[ 1157.916490]  ? tcf_block_put_ext+0x60/0x60
+[ 1157.916706]  ? hfsc_reset_qdisc+0x5c3/0x5e0
+[ 1157.916933]  hfsc_destroy_qdisc+0x77/0x130
+[ 1157.917140]  qdisc_destroy+0x5c/0x120
+[ 1157.917326]  dev_shutdown+0x122/0x170
+[ 1157.917509]  unregister_netdevice_many+0x45f/0x9c0
+[ 1157.917759]  ? mutex_is_locked+0x1b/0x30
+[ 1157.917968]  ? dev_qdisc_enqueue+0xc0/0xc0
+[ 1157.918174]  ? unregister_netdevice_many+0x9c0/0x9c0
+[ 1157.918426]  ? __mutex_lock_slowpath+0x10/0x10
+[ 1157.918649]  ? remove_proc_subtree+0x257/0x2d0
+[ 1157.918892]  sit_exit_batch_net+0x206/0x250
+[ 1157.919130]  ? ipip6_get_size+0x10/0x10
+[ 1157.919324]  ? rxrpc_destroy_all_locals+0x37/0xc0
+[ 1157.919564]  ? rxrpc_destroy_all_locals+0xc0/0xc0
+[ 1157.919819]  cleanup_net+0x2e6/0x4d0
+[ 1157.920007]  ? net_free+0x60/0x60
+[ 1157.920181]  ? read_word_at_a_time+0xe/0x20
+[ 1157.920409]  ? strscpy+0xbf/0x190
+[ 1157.920585]  process_one_work+0x48d/0x790
+[ 1157.920831]  worker_thread+0x78/0x6c0
+[ 1157.921020]  ? process_one_work+0x790/0x790
+[ 1157.921251]  kthread+0x1d2/0x200
+[ 1157.921417]  ? set_kthread_struct+0x80/0x80
+[ 1157.921629]  ret_from_fork+0x22/0x30
+[ 1157.921846] ---[ end trace 55336329e737043f ]---
+[ 1157.922106] stack segment: 0000 [#1] SMP KASAN
+[ 1157.922334] CPU: 0 PID: 221 Comm: kworker/u4:3 Tainted: G    B   W         5.15.0-detector-kasan #18
+[ 1157.922797] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[ 1157.923202] Workqueue: netns cleanup_net
+[ 1157.923401] RIP: 0010:tcf_action_destroy+0x5e/0xa0
+[ 1157.923639] Code: 0b ff 48 8b 2b 48 85 ed 74 4c 48 c7 03 00 00 00 00 48 89 ef e8 13 1f 0b ff 31 f6 45 85 f6 ba 01 00 00 00 48
+[ 1157.924546] RSP: 0018:ffff888009ca7878 EFLAGS: 00010202
+[ 1157.924825] RAX: 0000000000000000 RBX: ffff88800986a408 RCX: ffffffff823f27bd
+[ 1157.925225] RDX: 0000000000000001 RSI: 0000000000000001 RDI: d00000ab00000007
+[ 1157.925627] RBP: d00000ab00000007 R08: 0000000000000001 R09: ffffed100129b905
+[ 1157.926041] R10: 0000000000000003 R11: ffffed100129b904 R12: 0000000000000000
+[ 1157.926444] R13: ffff88800913e840 R14: 0000000000000001 R15: ffff88800986a500
+[ 1157.926847] FS:  0000000000000000(0000) GS:ffff888036200000(0000) knlGS:0000000000000000
+[ 1157.927299] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 1157.927622] CR2: 00007fa0d4ca66f4 CR3: 0000000004210000 CR4: 00000000000006f0
+[ 1157.928019] Call Trace:
+[ 1157.928162]  tcf_exts_destroy+0x29/0x50
+[ 1157.928379]  __route4_delete_filter+0x16/0x90
+[ 1157.928625]  route4_destroy+0x28f/0x350
+[ 1157.928850]  ? route4_init+0x50/0x50
+[ 1157.929023]  ? __mutex_lock_slowpath+0x10/0x10
+[ 1157.929243]  tcf_proto_destroy+0x4e/0x150
+[ 1157.929444]  tcf_chain_flush+0xd2/0x140
+[ 1157.929635]  __tcf_block_put+0xd9/0x1b0
+[ 1157.929827]  tcf_block_put+0x9c/0xe0
+[ 1157.930005]  ? tcf_block_put_ext+0x60/0x60
+[ 1157.930208]  ? hfsc_reset_qdisc+0x5c3/0x5e0
+[ 1157.930416]  hfsc_destroy_qdisc+0x77/0x130
+[ 1157.930620]  qdisc_destroy+0x5c/0x120
+[ 1157.930804]  dev_shutdown+0x122/0x170
+[ 1157.930986]  unregister_netdevice_many+0x45f/0x9c0
+[ 1157.931226]  ? mutex_is_locked+0x1b/0x30
+[ 1157.931421]  ? dev_qdisc_enqueue+0xc0/0xc0
+[ 1157.931625]  ? unregister_netdevice_many+0x9c0/0x9c0
+[ 1157.931869]  ? __mutex_lock_slowpath+0x10/0x10
+[ 1157.932088]  ? remove_proc_subtree+0x257/0x2d0
+[ 1157.932307]  sit_exit_batch_net+0x206/0x250
+[ 1157.932515]  ? ipip6_get_size+0x10/0x10
+[ 1157.932705]  ? rxrpc_destroy_all_locals+0x37/0xc0
+[ 1157.932951]  ? rxrpc_destroy_all_locals+0xc0/0xc0
+[ 1157.933181]  cleanup_net+0x2e6/0x4d0
+[ 1157.933358]  ? net_free+0x60/0x60
+[ 1157.933535]  ? read_word_at_a_time+0xe/0x20
+[ 1157.933745]  ? strscpy+0xbf/0x190
+[ 1157.933911]  process_one_work+0x48d/0x790
+[ 1157.934110]  worker_thread+0x78/0x6c0
+[ 1157.934292]  ? process_one_work+0x790/0x790
+[ 1157.934497]  kthread+0x1d2/0x200
+[ 1157.934659]  ? set_kthread_struct+0x80/0x80
+[ 1157.934864]  ret_from_fork+0x22/0x30
+[ 1157.935042] Modules linked in:
+[ 1157.935236] ---[ end trace 55336329e7370440 ]---
+[ 1157.935462] RIP: 0010:tcf_action_destroy+0x5e/0xa0
+[ 1157.935696] Code: 0b ff 48 8b 2b 48 85 ed 74 4c 48 c7 03 00 00 00 00 48 89 ef e8 13 1f 0b ff 31 f6 45 85 f6 ba 01 00 00 00 48
+[ 1157.936604] RSP: 0018:ffff888009ca7878 EFLAGS: 00010202
+[ 1157.936913] RAX: 0000000000000000 RBX: ffff88800986a408 RCX: ffffffff823f27bd
+[ 1157.937270] RDX: 0000000000000001 RSI: 0000000000000001 RDI: d00000ab00000007
+[ 1157.937624] RBP: d00000ab00000007 R08: 0000000000000001 R09: ffffed100129b905
+[ 1157.937987] R10: 0000000000000003 R11: ffffed100129b904 R12: 0000000000000000
+[ 1157.938337] R13: ffff88800913e840 R14: 0000000000000001 R15: ffff88800986a500
+[ 1157.938696] FS:  0000000000000000(0000) GS:ffff888036200000(0000) knlGS:0000000000000000
+[ 1157.939119] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 1157.939417] CR2: 00007fa0d4ca66f4 CR3: 0000000004210000 CR4: 00000000000006f0

@@ -1,0 +1,64 @@
+[ 2240.949340] ==================================================================
+[ 2240.951005] BUG: KASAN: slab-out-of-bounds in sha512_final+0x130/0x190
+[ 2240.952332] Write of size 8 at addr ffff888006a5e540 by task poc/1249
+[ 2240.953512] 
+[ 2240.953808] CPU: 1 PID: 1249 Comm: poc Not tainted 5.15.0-detector-kasan #7
+[ 2240.955090] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[ 2240.956610] Call Trace:
+[ 2240.956758]  dump_stack_lvl+0x34/0x44
+[ 2240.956952]  print_address_description.constprop.0+0x21/0x140
+[ 2240.957241]  ? sha512_final+0x130/0x190
+[ 2240.957432]  ? sha512_final+0x130/0x190
+[ 2240.957625]  kasan_report.cold+0x83/0xdf
+[ 2240.957824]  ? sha512_final+0x130/0x190
+[ 2240.958017]  kasan_check_range+0x14e/0x1b0
+[ 2240.958224]  sha512_final+0x130/0x190
+[ 2240.958411]  __keyctl_dh_compute+0x719/0xa20
+[ 2240.958628]  ? dh_data_from_key+0x100/0x100
+[ 2240.958836]  ? up_read+0x15/0x80
+[ 2240.959003]  ? key_type_lookup+0x90/0x90
+[ 2240.959200]  ? join_session_keyring+0x1a0/0x1a0
+[ 2240.959428]  ? should_fail+0x78/0x2a0
+[ 2240.959615]  keyctl_dh_compute+0x9f/0x100
+[ 2240.959817]  ? __keyctl_dh_compute+0xa20/0xa20
+[ 2240.960042]  ? fpregs_assert_state_consistent+0x52/0x60
+[ 2240.960302]  ? exit_to_user_mode_prepare+0x35/0x150
+[ 2240.960547]  ? __x64_sys_keyctl+0x4d/0x3a0
+[ 2240.960754]  do_syscall_64+0x3b/0x90
+[ 2240.960937]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[ 2240.961198] RIP: 0033:0x7f85356af9b9
+[ 2240.961380] Code: 00 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 48
+[ 2240.962295] RSP: 002b:00007ffcd10cc4c8 EFLAGS: 00000246 ORIG_RAX: 00000000000000fa
+[ 2240.962670] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f85356af9b9
+[ 2240.963021] RDX: 0000000020a53ffb RSI: 0000000020000100 RDI: 0000000000000017
+[ 2240.963370] RBP: 00007ffcd10cc4e0 R08: 0000000020000140 R09: 0000000000000000
+[ 2240.963720] R10: 0000000000000018 R11: 0000000000000246 R12: 000055ae18782060
+[ 2240.964070] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+[ 2240.964423] 
+[ 2240.964503] Allocated by task 1249:
+[ 2240.964680]  kasan_save_stack+0x1b/0x40
+[ 2240.964871]  __kasan_kmalloc+0x7c/0x90
+[ 2240.965059]  __keyctl_dh_compute+0x652/0xa20
+[ 2240.965274]  keyctl_dh_compute+0x9f/0x100
+[ 2240.965474]  do_syscall_64+0x3b/0x90
+[ 2240.965654]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[ 2240.965905] 
+[ 2240.965987] The buggy address belongs to the object at ffff888006a5e500
+[ 2240.965987]  which belongs to the cache kmalloc-64 of size 64
+[ 2240.966590] The buggy address is located 0 bytes to the right of
+[ 2240.966590]  64-byte region [ffff888006a5e500, ffff888006a5e540)
+[ 2240.967176] The buggy address belongs to the page:
+[ 2240.967415] page:0000000004304d50 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x6a5e
+[ 2240.967870] flags: 0x100000000000200(slab|node=0|zone=1)
+[ 2240.968133] raw: 0100000000000200 ffffea0000222580 0000000a0000000a ffff888005841640
+[ 2240.968515] raw: 0000000000000000 0000000080200020 00000001ffffffff 0000000000000000
+[ 2240.968895] page dumped because: kasan: bad access detected
+[ 2240.969170] 
+[ 2240.969249] Memory state around the buggy address:
+[ 2240.969487]  ffff888006a5e400: fb fb fb fb fb fb fb fb fc fc fc fc fc fc fc fc
+[ 2240.969839]  ffff888006a5e480: fb fb fb fb fb fb fb fb fc fc fc fc fc fc fc fc
+[ 2240.970190] >ffff888006a5e500: 00 00 00 00 00 00 00 00 fc fc fc fc fc fc fc fc
+[ 2240.970540]                                            ^
+[ 2240.970799]  ffff888006a5e580: fb fb fb fb fb fb fb fb fc fc fc fc fc fc fc fc
+[ 2240.971147]  ffff888006a5e600: 00 00 00 00 00 00 00 fc fc fc fc fc fc fc fc fc
+[ 2240.971495] ==================================================================
