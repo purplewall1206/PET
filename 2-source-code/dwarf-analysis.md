@@ -13,7 +13,7 @@ llvm-dwarfdump --debug-frame vmlinux > debuginfo/vmlinux.debug_frame
 ```
 
 for short
-```
+```shell
 objdump -drwC vmlinux > vmlinux.s;llvm-dwarfdump --debug-info vmlinux > debuginfo/vmlinux.debug_info;llvm-dwarfdump --debug-line vmlinux > debuginfo/vmlinux.debug_line;llvm-dwarfdump --debug-frame vmlinux > debuginfo/vmlinux.debug_frame
 ```
 

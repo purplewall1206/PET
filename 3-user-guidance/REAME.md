@@ -7,7 +7,7 @@ We analyze and parse the DWARF debug information to bridge the semantic gap betw
 
 Here we list the detailed process to extract the context and the problems come along. Example from CVE-2022-34918.
 
-**a more detailed example about [how-to-prevent-CVE-2016-6187](./how-to-prevent-CVE-2016-6187.md)**
+- **a more detailed example about [how-to-prevent-CVE-2016-6187](./how-to-prevent-CVE-2016-6187.md)**
 
 ## P1: locate the vulnerable context in the kernel binary file.
 
@@ -160,3 +160,9 @@ Some times we need to probe on the function epilogue, a `retprobe` performs bett
 // ffffffff81aa20ce:       e8 1d 16 83 ff          call   ffffffff812d36f0 <__kmalloc>  // set->ops->elemsize + tmpl->len
 // ffffffff81aa20d3:       0f b7 55 00             movzwl 0x0(%rbp),%edx
 ```
+
+## more templates
+
+researchers can refer to the templates for more BPF prevention programs.
+
+![templates](./bpf_detector-22_page-0001.jpg)

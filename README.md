@@ -1,26 +1,34 @@
 # PET
 
-- oob: CVE-2016-6187
-- uaf: CVE-2021-4154
-- int: CVE-2017-7184
-- race: syz
-- uninit: 
+- [1-evaluation](./1-evaluation/): the artifact evaluation programs.
+- [2-source-code](./2-source-code/): more implemtation details.
+- [3-user-guidance](./3-user-guidance/): helper individuals develop new BPF prevention programs.
 
-The artifact include 3 parts, programs for evaluation, and the user guidance and source code for researchers who insterest our work.
+## abstract
+This artifact is applying for a **"Artifacts Available" badge**. The artifact consists of three key components: evaluation programs, user guidance, and source code. These components are designed to provide a comprehensive understanding of our work and assist in the evaluation process. And the artifact evaluation mainly focuses on the effectiveness of the BPF prevention programs.
 
-To prove the effectiveness of our BPF error prevention program
+The evaluation programs included in the artifact are BPF prevention programs, Proofs-of-concepts, and compiled kernel images. These programs are intended to be run in the qemu virtual machine with the compiled kernel. By running the Proofs-of-concepts under the protection of the BPF prevention programs, evaluators can assess their effectiveness in preventing errors.
 
-we present 5 BPF programs to prevent 5 types of kernel errors from being triggered. we also present proof-of-concept alongside the errors.
+Furthermore, the artifact includes comprehensive user guidance. This guidance is meant to help individuals grasp the process of developing their own error prevention programs based on fuzz reports. It provides detailed instructions and explanations to support researchers in their own investigations.
 
-we also provide compiled native and sanitized kernel images for runtime verification.
+Lastly, the artifact contains the source code. This encompasses a significant portion of the code used in our research, allowing researchers to delve deeper into the implementation details and potentially build upon our work.
 
-The types of errors including out-of-bound, use-after-free, integer overflow, data race, and uninitialization.
+In summary, the artifact provides valuable insights to enhance researchers' understanding of our work and facilitate further investigation of the PET framework. 
 
-the provided programs support evaluating effectiveness of the POCs, we can run 3 of the proof-of-concepts in the sanitized kernel to get the sanitized report(including out-of-bound, use-after-free, integer overflow, uninitializations sanitizers hasn't been merged into upstream, and data race sanitizer does not provide proof-of-concepts)
+## set up
+execute `evaluate.sh` to set up environment and pop up 2 terminals.
 
-the provided programs support evaluating effectiveness of the Then we start the qemu virtual machine to run POCs under the protection of BPF programs, results show that the kernel errors are prevented and the system run smoothly.
+![terminals](./figs/fig-2terminal.png)
+
+## evaluation
+
+boot up BPF programs by executing `start-bpf-progs.sh` in *terminal 2*.
+
+and execute proof-of-concepts in *terminal 1*.
+
+![result](./figs/fig-results.png)
 
 
 ## more templates
 
-![templates](./bpf_detector-22_page-0001.jpg)
+![templates](./3-user-guidance/bpf_detector-22_page-0001.jpg)

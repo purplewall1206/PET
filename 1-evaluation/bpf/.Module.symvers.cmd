@@ -1,0 +1,1 @@
+cmd_/pet/linux-5.15-vulns/samples/bpf/Module.symvers := sed 's/\.ko$$/\.o/' /pet/linux-5.15-vulns/samples/bpf/modules.order | scripts/mod/modpost -m -a  -o /pet/linux-5.15-vulns/samples/bpf/Module.symvers -e -i Module.symvers   -T -
