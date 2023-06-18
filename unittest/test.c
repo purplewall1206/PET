@@ -10,5 +10,6 @@ static inline void * ERR_PTR(long error)
 int main()
 {
     printf("%016lx\n", ERR_PTR(-EINVAL));
+    printf("%016lx\n", (-107));
     return 0;
 }

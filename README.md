@@ -19,3 +19,8 @@ The types of errors including out-of-bound, use-after-free, integer overflow, da
 the provided programs support evaluating effectiveness of the POCs, we can run 3 of the proof-of-concepts in the sanitized kernel to get the sanitized report(including out-of-bound, use-after-free, integer overflow, uninitializations sanitizers hasn't been merged into upstream, and data race sanitizer does not provide proof-of-concepts)
 
 the provided programs support evaluating effectiveness of the Then we start the qemu virtual machine to run POCs under the protection of BPF programs, results show that the kernel errors are prevented and the system run smoothly.
+
+
+## more templates
+
+![templates](./bpf_detector-22_page-0001.jpg)

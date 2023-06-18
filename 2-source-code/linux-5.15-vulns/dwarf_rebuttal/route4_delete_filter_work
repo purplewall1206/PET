@@ -1,0 +1,445 @@
+vmlinux:	file format elf64-x86-64
+
+0x0b0e9a42: DW_TAG_subprogram
+              DW_AT_name	("route4_delete_filter_work")
+              DW_AT_decl_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/net/sched/cls_route.c")
+              DW_AT_decl_line	(260)
+              DW_AT_decl_column	(0x0d)
+              DW_AT_prototyped	(true)
+              DW_AT_low_pc	(0xffffffff81adc110)
+              DW_AT_high_pc	(0xffffffff81adc184)
+              DW_AT_frame_base	(DW_OP_call_frame_cfa)
+              DW_AT_call_all_calls	(true)
+              DW_AT_sibling	(0x0b0e9d9b)
+
+0x0b0e9a61:   DW_TAG_formal_parameter
+                DW_AT_name	("work")
+                DW_AT_decl_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/net/sched/cls_route.c")
+                DW_AT_decl_line	(260)
+                DW_AT_decl_column	(0x3b)
+                DW_AT_type	(0x0b0cb4ea "work_struct *")
+                DW_AT_location	(0x0170dd39: 
+                   [0xffffffff81adc110, 0xffffffff81adc122): DW_OP_reg5 RDI
+                   [0xffffffff81adc122, 0xffffffff81adc15b): DW_OP_reg3 RBX
+                   [0xffffffff81adc15b, 0xffffffff81adc15c): DW_OP_breg6 RBP+88, DW_OP_stack_value
+                   [0xffffffff81adc15c, 0xffffffff81adc161): DW_OP_entry_value(DW_OP_reg5 RDI), DW_OP_stack_value
+                   [0xffffffff81adc161, 0xffffffff81adc16f): DW_OP_reg3 RBX
+                   [0xffffffff81adc16f, 0xffffffff81adc170): DW_OP_breg6 RBP+88, DW_OP_stack_value
+                   [0xffffffff81adc170, 0xffffffff81adc175): DW_OP_entry_value(DW_OP_reg5 RDI), DW_OP_stack_value
+                   [0xffffffff81adc175, 0xffffffff81adc184): DW_OP_reg3 RBX)
+                DW_AT_GNU_locviews	(0x0170dd29)
+
+0x0b0e9a75:   DW_TAG_variable
+                DW_AT_name	("f")
+                DW_AT_decl_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/net/sched/cls_route.c")
+                DW_AT_decl_line	(262)
+                DW_AT_decl_column	(0x18)
+                DW_AT_type	(0x0b0e6a32 "route4_filter *")
+                DW_AT_location	(0x0170dd81: 
+                   [0xffffffff81adc11a, 0xffffffff81adc15c): DW_OP_reg6 RBP
+                   [0xffffffff81adc15c, 0xffffffff81adc161): DW_OP_entry_value(DW_OP_reg5 RDI), DW_OP_const1u 0x58, DW_OP_minus, DW_OP_stack_value
+                   [0xffffffff81adc161, 0xffffffff81adc170): DW_OP_reg6 RBP
+                   [0xffffffff81adc170, 0xffffffff81adc175): DW_OP_entry_value(DW_OP_reg5 RDI), DW_OP_const1u 0x58, DW_OP_minus, DW_OP_stack_value
+                   [0xffffffff81adc175, 0xffffffff81adc184): DW_OP_reg6 RBP)
+                DW_AT_GNU_locviews	(0x0170dd77)
+
+0x0b0e9a87:   DW_TAG_lexical_block
+                DW_AT_ranges	(0x002df844
+                   [0xffffffff81adc115, 0xffffffff81adc115)
+                   [0xffffffff81adc116, 0xffffffff81adc11a))
+                DW_AT_sibling	(0x0b0e9b2e)
+
+0x0b0e9a90:     DW_TAG_variable
+                  DW_AT_name	("__mptr")
+                  DW_AT_decl_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/net/sched/cls_route.c")
+                  DW_AT_decl_line	(262)
+                  DW_AT_decl_column	(0x1c)
+                  DW_AT_type	(0x0b0c80c6 "void *")
+                  DW_AT_location	(0x0170ddc0: 
+                     [0xffffffff81adc110, 0xffffffff81adc122): DW_OP_reg5 RDI
+                     [0xffffffff81adc122, 0xffffffff81adc15b): DW_OP_reg3 RBX
+                     [0xffffffff81adc15b, 0xffffffff81adc15c): DW_OP_breg6 RBP+88, DW_OP_stack_value
+                     [0xffffffff81adc15c, 0xffffffff81adc161): DW_OP_entry_value(DW_OP_reg5 RDI), DW_OP_stack_value
+                     [0xffffffff81adc161, 0xffffffff81adc16f): DW_OP_reg3 RBX
+                     [0xffffffff81adc16f, 0xffffffff81adc170): DW_OP_breg6 RBP+88, DW_OP_stack_value
+                     [0xffffffff81adc170, 0xffffffff81adc175): DW_OP_entry_value(DW_OP_reg5 RDI), DW_OP_stack_value
+                     [0xffffffff81adc175, 0xffffffff81adc184): DW_OP_reg3 RBX)
+                  DW_AT_GNU_locviews	(0x0170ddb0)
+
+0x0b0e9aa4:     DW_TAG_lexical_block
+                  DW_AT_low_pc	(0xffffffff81adc115)
+                  DW_AT_high_pc	(0xffffffff81adc115)
+                  DW_AT_sibling	(0x0b0e9ac3)
+
+0x0b0e9ab9:       DW_TAG_subprogram
+                    DW_AT_external	(true)
+                    DW_AT_name	("__compiletime_assert_658")
+                    DW_AT_decl_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/net/sched/cls_route.c")
+                    DW_AT_decl_line	(262)
+                    DW_AT_decl_column	(0x1c)
+                    DW_AT_prototyped	(true)
+                    DW_AT_declaration	(true)
+
+0x0b0e9ac2:       NULL
+
+0x0b0e9ac3:     DW_TAG_inlined_subroutine
+                  DW_AT_abstract_origin	(0x0b0eb581 "to_rcu_work")
+                  DW_AT_entry_pc	(0xffffffff81adc115)
+                  DW_AT_GNU_entry_view	(0x0002)
+                  DW_AT_low_pc	(0xffffffff81adc115)
+                  DW_AT_high_pc	(0xffffffff81adc115)
+                  DW_AT_call_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/net/sched/cls_route.c")
+                  DW_AT_call_line	(262)
+                  DW_AT_call_column	(0x1c)
+
+0x0b0e9ae6:       DW_TAG_formal_parameter
+                    DW_AT_abstract_origin	(0x0b0eb591 "work")
+                    DW_AT_location	(0x0170de00: 
+                       [0xffffffff81adc110, 0xffffffff81adc110): DW_OP_reg5 RDI)
+                    DW_AT_GNU_locviews	(0x0170ddfe)
+
+0x0b0e9af3:       DW_TAG_lexical_block
+                    DW_AT_abstract_origin	(0x0b0eb59d)
+                    DW_AT_low_pc	(0xffffffff81adc115)
+                    DW_AT_high_pc	(0xffffffff81adc115)
+
+0x0b0e9b08:         DW_TAG_variable
+                      DW_AT_abstract_origin	(0x0b0eb59e "__mptr")
+                      DW_AT_location	(0x0170de1d: 
+                         [0xffffffff81adc110, 0xffffffff81adc122): DW_OP_reg5 RDI
+                         [0xffffffff81adc122, 0xffffffff81adc15b): DW_OP_reg3 RBX
+                         [0xffffffff81adc15b, 0xffffffff81adc15c): DW_OP_breg6 RBP+88, DW_OP_stack_value
+                         [0xffffffff81adc15c, 0xffffffff81adc161): DW_OP_entry_value(DW_OP_reg5 RDI), DW_OP_stack_value
+                         [0xffffffff81adc161, 0xffffffff81adc16f): DW_OP_reg3 RBX
+                         [0xffffffff81adc16f, 0xffffffff81adc170): DW_OP_breg6 RBP+88, DW_OP_stack_value
+                         [0xffffffff81adc170, 0xffffffff81adc175): DW_OP_entry_value(DW_OP_reg5 RDI), DW_OP_stack_value
+                         [0xffffffff81adc175, 0xffffffff81adc184): DW_OP_reg3 RBX)
+                      DW_AT_GNU_locviews	(0x0170de0d)
+
+0x0b0e9b15:         DW_TAG_lexical_block
+                      DW_AT_abstract_origin	(0x0b0eb5aa)
+                      DW_AT_low_pc	(0xffffffff81adc115)
+                      DW_AT_high_pc	(0xffffffff81adc115)
+
+0x0b0e9b2b:         NULL
+
+0x0b0e9b2c:       NULL
+
+0x0b0e9b2d:     NULL
+
+0x0b0e9b2e:   DW_TAG_inlined_subroutine
+                DW_AT_abstract_origin	(0x0b0e9d9b "__route4_delete_filter")
+                DW_AT_entry_pc	(0xffffffff81adc123)
+                DW_AT_GNU_entry_view	(0x0001)
+                DW_AT_ranges	(0x002df854
+                   [0xffffffff81adc123, 0xffffffff81adc15a)
+                   [0xffffffff81adc161, 0xffffffff81adc16e)
+                   [0xffffffff81adc175, 0xffffffff81adc184))
+                DW_AT_call_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/net/sched/cls_route.c")
+                DW_AT_call_line	(266)
+                DW_AT_call_column	(0x02)
+                DW_AT_sibling	(0x0b0e9d71)
+
+0x0b0e9b49:     DW_TAG_formal_parameter
+                  DW_AT_abstract_origin	(0x0b0e9da8 "f")
+                  DW_AT_location	(0x0170de61: 
+                     [0xffffffff81adc123, 0xffffffff81adc15a): DW_OP_reg6 RBP
+                     [0xffffffff81adc161, 0xffffffff81adc16e): DW_OP_reg6 RBP
+                     [0xffffffff81adc175, 0xffffffff81adc184): DW_OP_reg6 RBP)
+                  DW_AT_GNU_locviews	(0x0170de5b)
+
+0x0b0e9b56:     DW_TAG_inlined_subroutine
+                  DW_AT_abstract_origin	(0x0b0ead9c "tcf_exts_put_net")
+                  DW_AT_entry_pc	(0xffffffff81adc12c)
+                  DW_AT_GNU_entry_view	(0x0001)
+                  DW_AT_ranges	(0x002df867
+                     [0xffffffff81adc12c, 0xffffffff81adc152)
+                     [0xffffffff81adc161, 0xffffffff81adc166)
+                     [0xffffffff81adc175, 0xffffffff81adc184))
+                  DW_AT_call_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/net/sched/cls_route.c")
+                  DW_AT_call_line	(256)
+                  DW_AT_call_column	(0x02)
+                  DW_AT_sibling	(0x0b0e9d2c)
+
+0x0b0e9b71:       DW_TAG_formal_parameter
+                    DW_AT_abstract_origin	(0x0b0eada9 "exts")
+                    DW_AT_location	(0x0170de80: 
+                       [0xffffffff81adc12c, 0xffffffff81adc152): DW_OP_breg6 RBP+32, DW_OP_stack_value
+                       [0xffffffff81adc161, 0xffffffff81adc166): DW_OP_breg6 RBP+32, DW_OP_stack_value
+                       [0xffffffff81adc175, 0xffffffff81adc184): DW_OP_breg6 RBP+32, DW_OP_stack_value)
+                    DW_AT_GNU_locviews	(0x0170de7a)
+
+0x0b0e9b7e:       DW_TAG_inlined_subroutine
+                    DW_AT_abstract_origin	(0x0b0eb1ed "put_net")
+                    DW_AT_entry_pc	(0xffffffff81adc135)
+                    DW_AT_GNU_entry_view	(0x0001)
+                    DW_AT_ranges	(0x002df87a
+                       [0xffffffff81adc135, 0xffffffff81adc152)
+                       [0xffffffff81adc161, 0xffffffff81adc166)
+                       [0xffffffff81adc175, 0xffffffff81adc184))
+                    DW_AT_call_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/./include/net/pkt_cls.h")
+                    DW_AT_call_line	(249)
+                    DW_AT_call_column	(0x03)
+
+0x0b0e9b94:         DW_TAG_formal_parameter
+                      DW_AT_abstract_origin	(0x0b0eb1fb "net")
+                      DW_AT_location	(0x0170dea7: 
+                         [0xffffffff81adc135, 0xffffffff81adc152): DW_OP_reg5 RDI
+                         [0xffffffff81adc161, 0xffffffff81adc165): DW_OP_reg5 RDI
+                         [0xffffffff81adc175, 0xffffffff81adc17d): DW_OP_reg5 RDI
+                         [0xffffffff81adc17d, 0xffffffff81adc181): DW_OP_breg3 RBX-40)
+                      DW_AT_GNU_locviews	(0x0170de9f)
+
+0x0b0e9ba1:         DW_TAG_inlined_subroutine
+                      DW_AT_abstract_origin	(0x0b0eb456 "refcount_dec_and_test")
+                      DW_AT_entry_pc	(0xffffffff81adc13c)
+                      DW_AT_GNU_entry_view	(0x0000)
+                      DW_AT_ranges	(0x002df88d
+                         [0xffffffff81adc13c, 0xffffffff81adc152)
+                         [0xffffffff81adc161, 0xffffffff81adc161)
+                         [0xffffffff81adc175, 0xffffffff81adc184))
+                      DW_AT_call_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/./include/net/net_namespace.h")
+                      DW_AT_call_line	(263)
+                      DW_AT_call_column	(0x06)
+                      DW_AT_sibling	(0x0b0e9d1d)
+
+0x0b0e9bbc:           DW_TAG_formal_parameter
+                        DW_AT_abstract_origin	(0x0b0eb468 "r")
+                        DW_AT_location	(0x0170decc: 
+                           [0xffffffff81adc13c, 0xffffffff81adc152): DW_OP_reg8 R8
+                           [0xffffffff81adc161, 0xffffffff81adc161): DW_OP_reg8 R8
+                           [0xffffffff81adc175, 0xffffffff81adc181): DW_OP_reg8 R8)
+                        DW_AT_GNU_locviews	(0x0170dec6)
+
+0x0b0e9bc9:           DW_TAG_inlined_subroutine
+                        DW_AT_abstract_origin	(0x0b0eb474 "__refcount_dec_and_test")
+                        DW_AT_entry_pc	(0xffffffff81adc13c)
+                        DW_AT_GNU_entry_view	(0x0002)
+                        DW_AT_ranges	(0x002df88d
+                           [0xffffffff81adc13c, 0xffffffff81adc152)
+                           [0xffffffff81adc161, 0xffffffff81adc161)
+                           [0xffffffff81adc175, 0xffffffff81adc184))
+                        DW_AT_call_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/./include/linux/refcount.h")
+                        DW_AT_call_line	(333)
+                        DW_AT_call_column	(0x09)
+
+0x0b0e9be0:             DW_TAG_formal_parameter
+                          DW_AT_abstract_origin	(0x0b0eb491 "oldp")
+                          DW_AT_location	(0x0170deeb: 
+                             [0xffffffff81adc13c, 0xffffffff81adc152): DW_OP_lit0, DW_OP_stack_value
+                             [0xffffffff81adc161, 0xffffffff81adc161): DW_OP_lit0, DW_OP_stack_value
+                             [0xffffffff81adc175, 0xffffffff81adc182): DW_OP_lit0, DW_OP_stack_value)
+                          DW_AT_GNU_locviews	(0x0170dee5)
+
+0x0b0e9bed:             DW_TAG_formal_parameter
+                          DW_AT_abstract_origin	(0x0b0eb486 "r")
+                          DW_AT_location	(0x0170df0d: 
+                             [0xffffffff81adc13c, 0xffffffff81adc152): DW_OP_reg8 R8
+                             [0xffffffff81adc161, 0xffffffff81adc161): DW_OP_reg8 R8
+                             [0xffffffff81adc175, 0xffffffff81adc181): DW_OP_reg8 R8)
+                          DW_AT_GNU_locviews	(0x0170df07)
+
+0x0b0e9bfa:             DW_TAG_inlined_subroutine
+                          DW_AT_abstract_origin	(0x0b0eb49f "__refcount_sub_and_test")
+                          DW_AT_entry_pc	(0xffffffff81adc13c)
+                          DW_AT_GNU_entry_view	(0x0004)
+                          DW_AT_ranges	(0x002df88d
+                             [0xffffffff81adc13c, 0xffffffff81adc152)
+                             [0xffffffff81adc161, 0xffffffff81adc161)
+                             [0xffffffff81adc175, 0xffffffff81adc184))
+                          DW_AT_call_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/./include/linux/refcount.h")
+                          DW_AT_call_line	(315)
+                          DW_AT_call_column	(0x09)
+
+0x0b0e9c11:               DW_TAG_formal_parameter
+                            DW_AT_abstract_origin	(0x0b0eb4b1 "i")
+                            DW_AT_location	(0x0170df2c: 
+                               [0xffffffff81adc13c, 0xffffffff81adc152): DW_OP_lit1, DW_OP_stack_value
+                               [0xffffffff81adc161, 0xffffffff81adc161): DW_OP_lit1, DW_OP_stack_value
+                               [0xffffffff81adc175, 0xffffffff81adc182): DW_OP_lit1, DW_OP_stack_value)
+                            DW_AT_GNU_locviews	(0x0170df26)
+
+0x0b0e9c1e:               DW_TAG_formal_parameter
+                            DW_AT_abstract_origin	(0x0b0eb4c7 "oldp")
+                            DW_AT_location	(0x0170df4e: 
+                               [0xffffffff81adc13c, 0xffffffff81adc152): DW_OP_lit0, DW_OP_stack_value
+                               [0xffffffff81adc161, 0xffffffff81adc161): DW_OP_lit0, DW_OP_stack_value
+                               [0xffffffff81adc175, 0xffffffff81adc182): DW_OP_lit0, DW_OP_stack_value)
+                            DW_AT_GNU_locviews	(0x0170df48)
+
+0x0b0e9c2b:               DW_TAG_formal_parameter
+                            DW_AT_abstract_origin	(0x0b0eb4c7 "oldp")
+                            DW_AT_location	(0x0170df70: 
+                               [0xffffffff81adc13c, 0xffffffff81adc152): DW_OP_lit0, DW_OP_stack_value
+                               [0xffffffff81adc161, 0xffffffff81adc161): DW_OP_lit0, DW_OP_stack_value
+                               [0xffffffff81adc175, 0xffffffff81adc182): DW_OP_lit0, DW_OP_stack_value)
+                            DW_AT_GNU_locviews	(0x0170df6a)
+
+0x0b0e9c38:               DW_TAG_formal_parameter
+                            DW_AT_abstract_origin	(0x0b0eb4bc "r")
+                            DW_AT_location	(0x0170df92: 
+                               [0xffffffff81adc13c, 0xffffffff81adc152): DW_OP_reg8 R8
+                               [0xffffffff81adc161, 0xffffffff81adc161): DW_OP_reg8 R8
+                               [0xffffffff81adc175, 0xffffffff81adc181): DW_OP_reg8 R8)
+                            DW_AT_GNU_locviews	(0x0170df8c)
+
+0x0b0e9c45:               DW_TAG_formal_parameter
+                            DW_AT_abstract_origin	(0x0b0eb4b1 "i")
+                            DW_AT_location	(0x0170dfb1: 
+                               [0xffffffff81adc13c, 0xffffffff81adc152): DW_OP_lit1, DW_OP_stack_value
+                               [0xffffffff81adc161, 0xffffffff81adc161): DW_OP_lit1, DW_OP_stack_value
+                               [0xffffffff81adc175, 0xffffffff81adc182): DW_OP_lit1, DW_OP_stack_value)
+                            DW_AT_GNU_locviews	(0x0170dfab)
+
+0x0b0e9c52:               DW_TAG_lexical_block
+                            DW_AT_ranges	(0x002df88d
+                               [0xffffffff81adc13c, 0xffffffff81adc152)
+                               [0xffffffff81adc161, 0xffffffff81adc161)
+                               [0xffffffff81adc175, 0xffffffff81adc184))
+
+0x0b0e9c57:                 DW_TAG_variable
+                              DW_AT_abstract_origin	(0x0b0eb4d4 "old")
+                              DW_AT_location	(0x0170dfd3: 
+                                 [0xffffffff81adc149, 0xffffffff81adc152): DW_OP_reg0 RAX
+                                 [0xffffffff81adc161, 0xffffffff81adc165): DW_OP_reg0 RAX
+                                 [0xffffffff81adc175, 0xffffffff81adc181): DW_OP_reg0 RAX)
+                              DW_AT_GNU_locviews	(0x0170dfcd)
+
+0x0b0e9c64:                 DW_TAG_inlined_subroutine
+                              DW_AT_abstract_origin	(0x0b0eb763 "atomic_fetch_sub_release")
+                              DW_AT_entry_pc	(0xffffffff81adc13c)
+                              DW_AT_GNU_entry_view	(0x0006)
+                              DW_AT_low_pc	(0xffffffff81adc13c)
+                              DW_AT_high_pc	(0xffffffff81adc149)
+                              DW_AT_call_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/./include/linux/refcount.h")
+                              DW_AT_call_line	(272)
+                              DW_AT_call_column	(0x0c)
+                              DW_AT_sibling	(0x0b0e9d06)
+
+0x0b0e9c8b:                   DW_TAG_formal_parameter
+                                DW_AT_abstract_origin	(0x0b0eb77d "v")
+                                DW_AT_location	(0x0170dfee: 
+                                   [0xffffffff81adc13c, 0xffffffff81adc149): DW_OP_reg8 R8)
+                                DW_AT_GNU_locviews	(0x0170dfec)
+
+0x0b0e9c98:                   DW_TAG_formal_parameter
+                                DW_AT_abstract_origin	(0x0b0eb773 "i")
+                                DW_AT_location	(0x0170dffd: 
+                                   [0xffffffff81adc13c, 0xffffffff81adc149): DW_OP_lit1, DW_OP_stack_value)
+                                DW_AT_GNU_locviews	(0x0170dffb)
+
+0x0b0e9ca5:                   DW_TAG_inlined_subroutine
+                                DW_AT_abstract_origin	(0x0b0eb865 "arch_atomic_fetch_sub")
+                                DW_AT_entry_pc	(0xffffffff81adc13c)
+                                DW_AT_GNU_entry_view	(0x0009)
+                                DW_AT_low_pc	(0xffffffff81adc13c)
+                                DW_AT_high_pc	(0xffffffff81adc149)
+                                DW_AT_call_file	("/home/ppw/Documents/ebpf-detector/linux-5.15-vulns/./include/linux/atomic/atomic-instrumented.h")
+                                DW_AT_call_line	(168)
+                                DW_AT_call_column	(0x09)
+
+0x0b0e9cc7:                     DW_TAG_formal_parameter
+                                  DW_AT_abstract_origin	(0x0b0eb87f "v")
+                                  DW_AT_location	(0x0170e00d: 
+                                     [0xffffffff81adc13c, 0xffffffff81adc149): DW_OP_reg8 R8)
+                                  DW_AT_GNU_locviews	(0x0170e00b)
+
+0x0b0e9cd4:                     DW_TAG_formal_parameter
+                                  DW_AT_abstract_origin	(0x0b0eb875 "i")
+                                  DW_AT_location	(0x0170e01c: 
+                                     [0xffffffff81adc13c, 0xffffffff81adc149): DW_OP_lit1, DW_OP_stack_value)
+                                  DW_AT_GNU_locviews	(0x0170e01a)
+
+0x0b0e9ce1:                     DW_TAG_lexical_block
+                                  DW_AT_abstract_origin	(0x0b0eb889)
+                                  DW_AT_low_pc	(0xffffffff81adc13c)
+                                  DW_AT_high_pc	(0xffffffff81adc149)
+
+0x0b0e9cf6:                       DW_TAG_variable
+                                    DW_AT_abstract_origin	(0x0b0eb88a "__ret")
+                                    DW_AT_location	(0x0170e02e: 
+                                       [0xffffffff81adc13c, 0xffffffff81adc149): DW_OP_const1s -1, DW_OP_stack_value
+                                       [0xffffffff81adc149, 0xffffffff81adc149): DW_OP_reg0 RAX)
+                                    DW_AT_GNU_locviews	(0x0170e02a)
+
+0x0b0e9d03:                       NULL
+
+0x0b0e9d04:                     NULL
+
+0x0b0e9d05:                   NULL
+
+0x0b0e9d06:                 DW_TAG_call_site
+                              DW_AT_call_return_pc	(0xffffffff81adc182)
+                              DW_AT_call_origin	(0x0b0e6d13)
+
+0x0b0e9d13:                   DW_TAG_call_site_parameter
+                                DW_AT_location	(DW_OP_reg4 RSI)
+                                DW_AT_call_value	(DW_OP_lit3)
+
+0x0b0e9d18:                   NULL
+
+0x0b0e9d19:                 NULL
+
+0x0b0e9d1a:               NULL
+
+0x0b0e9d1b:             NULL
+
+0x0b0e9d1c:           NULL
+
+0x0b0e9d1d:         DW_TAG_call_site
+                      DW_AT_call_return_pc	(0xffffffff81adc166)
+                      DW_AT_call_origin	(0x0b0e6d2f)
+
+0x0b0e9d2a:         NULL
+
+0x0b0e9d2b:       NULL
+
+0x0b0e9d2c:     DW_TAG_call_site
+                  DW_AT_call_return_pc	(0xffffffff81adc12c)
+                  DW_AT_call_origin	(0x0b0e6d53)
+                  DW_AT_sibling	(0x0b0e9d44)
+
+0x0b0e9d3d:       DW_TAG_call_site_parameter
+                    DW_AT_location	(DW_OP_reg5 RDI)
+                    DW_AT_call_value	(DW_OP_breg3 RBX-56)
+
+0x0b0e9d43:       NULL
+
+0x0b0e9d44:     DW_TAG_call_site
+                  DW_AT_call_return_pc	(0xffffffff81adc15a)
+                  DW_AT_call_origin	(0x0b0e6d41)
+                  DW_AT_sibling	(0x0b0e9d5c)
+
+0x0b0e9d55:       DW_TAG_call_site_parameter
+                    DW_AT_location	(DW_OP_reg5 RDI)
+                    DW_AT_call_value	(DW_OP_breg6 RBP+0)
+
+0x0b0e9d5b:       NULL
+
+0x0b0e9d5c:     DW_TAG_call_site
+                  DW_AT_call_return_pc	(0xffffffff81adc16e)
+                  DW_AT_call_origin	(0x0b0e6d41)
+
+0x0b0e9d69:       DW_TAG_call_site_parameter
+                    DW_AT_location	(DW_OP_reg5 RDI)
+                    DW_AT_call_value	(DW_OP_breg6 RBP+0)
+
+0x0b0e9d6f:       NULL
+
+0x0b0e9d70:     NULL
+
+0x0b0e9d71:   DW_TAG_call_site
+                DW_AT_call_return_pc	(0xffffffff81adc123)
+                DW_AT_call_origin	(0x0b0e6d6d)
+
+0x0b0e9d7e:   DW_TAG_call_site
+                DW_AT_call_return_pc	(0xffffffff81adc161)
+                DW_AT_call_tail_call	(true)
+                DW_AT_call_origin	(0x0b0e6d66)
+
+0x0b0e9d8c:   DW_TAG_call_site
+                DW_AT_call_return_pc	(0xffffffff81adc175)
+                DW_AT_call_tail_call	(true)
+                DW_AT_call_origin	(0x0b0e6d66)
+
+0x0b0e9d9a:   NULL

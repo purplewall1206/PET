@@ -1,9 +1,13 @@
 # templates for specific types of vulnerabilities
+
+
 The project's goal is to monitor/detect root causes of vulnerabilities, so the first challenge is locating the vulnerable site in the kernel binary file. The assembly address, or, to be specific, the offset from the start of the function,  is where the detection policy will be deployed.
 
 We analyze and parse the DWARF debug information to bridge the semantic gap between the source and optimized binary. Generally, the compiled kernel carries DWARF debug information in its ELF format executable file. The DWARF records the mapping between the source code and assembly code from the optimized binary. The mapping includes lines of code to assembly, registers, or stack addresses that store variables and offsets of data structure members. 
 
 Here we list the detailed process to extract the context and the problems come along. Example from CVE-2022-34918.
+
+**a more detailed example about [how-to-prevent-CVE-2016-6187](./how-to-prevent-CVE-2016-6187.md)**
 
 ## P1: locate the vulnerable context in the kernel binary file.
 
