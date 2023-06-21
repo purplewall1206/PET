@@ -1,4 +1,4 @@
-KERNEL=../images/bzImage-native
+KERNEL=./images/bzImage-native
 IMAGE=./bullseye.img
 qemu-system-x86_64 \
     -m 1G \
