@@ -78,7 +78,7 @@ execute `phoronix-test-suites result-file-to-text evaluation-*`, the results wil
 
 ### generate a new BPF program to prevent vulnerability from being triggered.
 
-more examples are in [user guidance](./2-).
+more examples are in [user guidance](./3-user-guidance/).
 
 There are mainly 4 steps to generate BPF program from scratch, we take a public available and fixed vulerability, `https://syzkaller.appspot.com/bug?id=6312526aba5beae046fdae8f00399f87aab48b12` as example
 
