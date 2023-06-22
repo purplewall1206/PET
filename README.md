@@ -61,7 +61,7 @@ and execute proof-of-concepts in *terminal 1*.
 **The demo presentation can be seen in [YouTube](https://www.youtube.com/watch?v=0BVsULXT0xI)**
 
 
-[![IMAGE ALT TEXT](https://img.youtube.com/vi/0BVsULXT0xI/0.jpg)](https://www.youtube.com/watch?v=0BVsULXT0xI "PET demo presentation")
+[![YouTube demo presentation](https://img.youtube.com/vi/0BVsULXT0xI/0.jpg)](https://www.youtube.com/watch?v=0BVsULXT0xI "PET demo presentation")
 
 ## reproducible evaluation
 
@@ -124,7 +124,7 @@ offset: 0xec
 
 after that, evaluator take the critical information as input, execute `python3 gen-uaf.py kasan-631252aba function offset`.
 
-2 files will be generated in the directory `/pet/linux-5.15-vulns/samples/bpf`, `detector_kasan-631252aba-evaluation.bpf.c` and `detector_kasan-631252aba-evaluation.c`
+2 files will be generated in the directory `./linux-5.15-vulns/samples/bpf`, `detector_kasan-631252aba-evaluation.bpf.c` and `detector_kasan-631252aba-evaluation.c`
 
 ```sh
 $ python3 gen-uaf.py  put_fs_context  kasan-631252aba  0xec  <path-to-kernel>/sample/bpf
