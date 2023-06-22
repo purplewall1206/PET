@@ -12,7 +12,7 @@ CVE = sys.argv[2]
 offset = sys.argv[3]
 fileaddr = sys.argv[4]
 
-fn = fileaddr+'/'+CVE+'-evaluation'
+fn = fileaddr+'/detector_'+CVE+'-evaluation'
 fn0 = fn + '.bpf.c'
 fn1 = fn + '.c'
 
