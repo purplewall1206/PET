@@ -1,7 +1,7 @@
 KERNEL=./linux-5.15-vulns/arch/x86/boot/bzImage
 IMAGE=./bullseye.img
 qemu-system-x86_64 \
-    -m 1G \
+    -m 2G \
     -smp 2 \
     -kernel $KERNEL \
     -append "nokaslr console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0" \

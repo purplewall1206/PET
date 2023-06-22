@@ -1,7 +1,7 @@
 KERNEL=/home/ppw/Documents/ebpf-detector/linux-5.15-KASAN
 IMAGE=./bullseye.img
 qemu-system-x86_64 \
-    -m 1G \
+    -m 2G \
     -smp 2 \
     -kernel $KERNEL/arch/x86/boot/bzImage \
     -append "nokaslr console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0" \
