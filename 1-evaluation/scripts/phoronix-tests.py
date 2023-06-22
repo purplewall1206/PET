@@ -17,7 +17,7 @@ def recvuntil_send(in0, in1, to):
 
 def main(argv):
     filename = argv[1]
-    sh.sendline(b'phoronix-test-suite benchmark apache pts/build-linux-kernel pts/encode-mp3 pts/git pts/nginx pts/compress-xz  system/gimp  sqlite-speedtest  openssl osbench  perf-bench wireguard pts/redis pts/perl-benchmark')
+    sh.sendline(b'phoronix-test-suite benchmark apache pts/build-linux-kernel pts/encode-mp3 pts/git pts/nginx pts/compress-xz  system/gimp  sqlite-speedtest  openssl osbench  perf-bench pts/redis pts/perl-benchmark')
     # sh.sendline(b'phoronix-test-suite benchmark apache pts/build-linux-kernel pts/encode-mp3 pts/git pts/nginx pts/compress-xz  system/gimp  sqlite-speedtest  openssl osbench tinymembench perf-bench wireguard')
     sh.recvuntil(b'Apache HTTP Server', timeout=20)
     # print('apache:')
