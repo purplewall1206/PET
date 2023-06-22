@@ -58,9 +58,10 @@ and execute proof-of-concepts in *terminal 1*.
     - Execution: KCSAN does not provide proof-of-concept,so no proof-of-concept is executed in terminal 1.
     - Results: The BPF program detector_kcsan_dcf8e5633e2ewill be keep checking if the vulnerability kcsan-dcf8e5633e2e is being triggered.
 
-The demo presentation can be seen in [youTube](https://www.youtube.com/watch?v=0BVsULXT0xI)
+**The demo presentation can be seen in [YouTube](https://www.youtube.com/watch?v=0BVsULXT0xI)**
 
 
+[![IMAGE ALT TEXT](https://img.youtube.com/vi/0BVsULXT0xI/0.jpg)](https://www.youtube.com/watch?v=0BVsULXT0xI "PET demo presentation")
 
 ## reproducible evaluation
 
