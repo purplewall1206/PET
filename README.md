@@ -84,6 +84,9 @@ First of all, evaluators need get bug report from sanitized kernel, we have prep
 Evaluators can boot up sanitized kernel by running `run-kasan.sh`, then execute `./scripts/test-CVE-20xx-xxxx.sh`, the bug report will be export to the *terminal 1*.
 after that, evaluators need to copy the bug report and paste in the file `CVE-20xx-xxxx.report`.
 
+```
+
+```
 
 
 #### 2. extract critical information and generate program
@@ -92,11 +95,26 @@ According to the error dependant policies in section *5.3 Use-After-Free Policy*
 
 PET needs to get the free position than may conduct dangling pointers from bug report, including *function* that calls memory free function, and *offset* from *call kfree* to *function* start.
 Evaluators can execute `python3 extract-uaf.py  CVE-20xx-xxxx.report` to get extract the critical information.
+```sh
+$ python3 extract-uaf-report.py CVE-2019-18344.report 
+BUG: KASAN: use-after-free in vid_cap_buf_queue+0xa2/0xc0
+ __vb2_queue_free+0x26f/0x360
+ __vb2_queue_free
+
+
+$ python3 extract-uaf-binary.py  __vb2_queue_free
+__vb2_queue_free: 0xffffffff8193c420
+the function that call: 0xffffffff8193c55e
+offset: 0x13e
+```
 
 after that, evaluator take the critical information as input, execute `python3 gen-uaf.py CVE-20xx-xxxx function offset`.
 
 2 files will be generated in the directory `/pet/linux-5.15-vulns/samples/bpf`, `detector_CVE-20xx-xxxx-evaluation.bpf.c` and `detector_CVE-20xx-xxxx-evaluation.c`
 
+```sh
+$ python3 gen-uaf.py  __vb2_queue  CVE-2019-18344  0x13e  <path-to-kernel>/sample/bpf
+```
 
 #### 3. compile the BPF program
 
