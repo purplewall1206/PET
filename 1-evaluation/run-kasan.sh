@@ -1,4 +1,4 @@
-KERNEL=./linux-5.15-vulns/arch/x86/boot/bzImage
+KERNEL=../bzImage-kasan
 IMAGE=./bullseye.img
 qemu-system-x86_64 \
     -m 2G \
