@@ -1,7 +1,7 @@
 KERNEL=./images/bzImage-kasan
 IMAGE=./bullseye.img
 qemu-system-x86_64 \
-    -m 2G \
+    -m 1G \
     -smp 2 \
     -kernel $KERNEL \
     -append "nokaslr console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0" \
@@ -10,6 +10,4 @@ qemu-system-x86_64 \
     -net nic,model=e1000 \
     -nographic \
     -pidfile vm.pid \
-    -enable-kvm \
-    # -s -S \
-#	2>&1 | tee vm.log
+    -enable-kvm
