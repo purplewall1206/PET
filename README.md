@@ -75,12 +75,28 @@ execute `phoronix-test-suites result-file-to-text evaluation-*`, the results wil
 
 **attention: it will takes at least 2 hours for one test, and 14 hours in total** 
 
+### parse the data
 
-### generate a new BPF program to prevent vulnerability from being triggered.
+- extract all the data in to `csv` format
+```sh
+phoronix-test-suite result-file-to-csv evaluation-vanilla
+phoronix-test-suite result-file-to-csv evaluation-CVE-2017-7184
+phoronix-test-suite result-file-to-csv evaluation-CVE-2016-6187
+phoronix-test-suite result-file-to-csv evaluation-CVE-2021-4154
+phoronix-test-suite result-file-to-csv evaluation-kmsan_4b28366af7d9
+phoronix-test-suite result-file-to-csv evaluation-kcsan_dcf8e5633e2e
+phoronix-test-suite result-file-to-csv evaluation-scalability
+```
+- analyze the data, execute `python3 analyze.py` (new added in the [1-evaluation](./1-evaluation)), there will be a `result.csv` outputted, including the data, and the overhead compared to the vanilla result. It can be read by any types of `excel/google sheets` like tools.
+
+**Due to the qemu experimental environment, the results may be partially different from the results of the paper, commonly found in system calls and networks**
+
+
+### generate a new BPF program to prevent the vulnerability from being triggered.
 
 more examples are in [user guidance](./3-user-guidance/).
 
-There are mainly 4 steps to generate BPF program from scratch, we take a public available and fixed vulerability, `https://syzkaller.appspot.com/bug?id=6312526aba5beae046fdae8f00399f87aab48b12` as example
+There are mainly 4 steps to generate BPF program from scratch, we take a publicly available and fixed vulerability, `https://syzkaller.appspot.com/bug?id=6312526aba5beae046fdae8f00399f87aab48b12` as example
 
 #### 1. get the bug report
 
