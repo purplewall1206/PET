@@ -87,7 +87,7 @@ phoronix-test-suite result-file-to-csv evaluation-kmsan_4b28366af7d9
 phoronix-test-suite result-file-to-csv evaluation-kcsan_dcf8e5633e2e
 phoronix-test-suite result-file-to-csv evaluation-scalability
 ```
-- analyze the data, execute `python3 analyze.py` (new added in the [1-evaluation](./1-evaluation)), there will be a `result.csv` outputted, including the data, and the overhead compared to the vanilla result. It can be read by any types of `excel/google sheets` like tools.
+- analyze the data, execute `python3 /root/scripts/analyze.py` (new added in the [1-evaluation](./1-evaluation)), there will be a table `/root/scripts/result.csv` outputted, including the data, and the overhead compared to the vanilla results. It can be read by any types of `excel/google sheets` like tools.
 
 **Due to the qemu experimental environment, the results may be partially different from the results of the paper, commonly found in system calls and networks**
 
