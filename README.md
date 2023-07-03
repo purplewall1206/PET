@@ -89,6 +89,21 @@ phoronix-test-suite result-file-to-csv evaluation-scalability
 ```
 - analyze the data, execute `python3 /root/scripts/analyze.py` (new added in the [1-evaluation](./1-evaluation)), there will be a table `/root/scripts/result.csv` outputted, including the data, and the overhead compared to the vanilla results. It can be read by any types of `excel/google sheets` like tools.
 
+results like the table
+```
+|          | perf-bench  | OSBench  | Timed Linux Kernel Compilation  | XZ Compression | LAME MP3 Encoding | Perl Benchmarks  | OpenSSL |average|
+|----------|-------------|----------|---------------------------------|----------------|-------------------|------------------|---------|-------|
+| vanilla  |             |          |                                 |                |                   |                  |         |       |
+| overhead |             |          |                                 |                |                   |                  |         |       |
+| cve-xxxx |             |          |                                 |                |                   |                  |         |       |
+| overhead | x%          | x%       |                                 |                |                   |                  |         |X%     |
+```
+
+the overhead rows present the overhead compared to the vanilla results, the last column is the average overhead. 
+
+**We present 5 results related to the 5 types of BPF programs, after that `scalability` shows the total overhead when 5 types of BPF programs run concurrently.**
+
+
 **Due to the qemu experimental environment, the results may be partially different from the results of the paper, commonly found in system calls and networks**
 
 
