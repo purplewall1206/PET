@@ -65,8 +65,9 @@ def main(argv):
     sleep(5)
 
     while True:
-        sleep(5)
-        text = sh.recvuntil(b'Do you want to view the results in your web browser', timeout=10)
+        # sleep(5)
+        # text = sh.recvuntil(b'Do you want to view the results in your web browser', timeout=10)
+        text=sh.recvuntil(b'Do you want to view the text results of the testing', timeout=10)
         if text.find(b'Do you want to view') != -1:
             sh.sendline(b'n')
             break
