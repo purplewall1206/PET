@@ -15,7 +15,7 @@ for filename in titles:
         with open(folder_path+filename, 'r') as file:
             reader = csv.reader(file)
             lines = list(reader)
-            column_data = [line[2] for line in lines[16:]]  # Adjust line index if needed
+            column_data = [line[2] for line in lines[16:48]]  # Adjust line index if needed
             csv_data.append(column_data)
             count = count + 1
     except FileNotFoundError:
