@@ -63,6 +63,7 @@ def main(argv):
     print('\n\n\n')
     sh.sendline(b'xxxxxxx')
     sleep(5)
+    sh.sendline(b'x')
 
     while True:
         # sleep(5)
