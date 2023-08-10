@@ -1,5 +1,7 @@
 # PET
 
+**our paper: [PET: Prevent Discovered Errors from Being Triggered in the Linux Kernel](https://www.usenix.org/conference/usenixsecurity23/presentation/wang-zicheng)**
+
 - [1-evaluation](./1-evaluation/): the artifact evaluation programs.
 - [2-source-code](./2-source-code/): more implemtation details.
 - [3-user-guidance](./3-user-guidance/): helper individuals develop new BPF prevention programs.
